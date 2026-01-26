@@ -25,6 +25,7 @@ require("dotenv").config();
 const http = require("http");
 const express = require("express"); // backend framework for our node server.
 const session = require("express-session"); // library that stores info about each connected user
+const path = require("path");
 const mongoose = require("mongoose"); // library to connect to MongoDB
 const path = require("path"); // provide utilities for working with file and directory paths
 
@@ -55,6 +56,7 @@ mongoose
 
 // create a new express server
 const app = express();
+app.use(express.static(path.join(__dirname, "..", "Client")));
 app.use(validator.checkRoutes);
 
 // allow us to process POST requests
@@ -85,9 +87,15 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(reactPath, "index.html"), (err) => {
     if (err) {
       console.log("Error sending client/dist/index.html:", err.status || 500);
-      res.status(err.status || 500).send("Error sending client/dist/index.html - have you run `npm run build`?");
+      res
+        .status(err.status || 500)
+        .send("Error sending client/dist/index.html - have you run `npm run build`?");
     }
   });
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "Client", "index.html"));
 });
 
 // any server errors cause this function to run
