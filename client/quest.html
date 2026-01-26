@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="Ellipse 1 copy.png" type="image/x-icon" />
+    <link rel="icon" href="Ellipse 1 copy.png" type="image/x-icon" />
+    <title>Your Quests</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body class="night-mode">
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h2>Menu</h2>
+        <button id="night-mode-toggle" class="night-mode-toggle">☀️</button>
+
+        <div class="login-box">
+          <button id="google-login">Log in with Google</button>
+        </div>
+
+        <button onclick="goHome()">🏠 Home</button>
+
+        <h3>Default Tasks</h3>
+        <div class="task-list">
+          <div class="task" draggable="true">🧺 Laundry</div>
+          <div class="task" draggable="true">🧹 Cleaning</div>
+          <div class="task" draggable="true">📚 Study</div>
+          <div class="task" draggable="true">🛒 Groceries</div>
+        </div>
+
+        <h3>Motivators</h3>
+        <div class="motivators">
+          <!-- <div class="motivator" draggable="true">🐉</div>
+          <div class="motivator" draggable="true">🧙</div>
+          <div class="motivator" draggable="true">🗡️</div>
+          <div class="motivator" draggable="true">🦉</div> -->
+          <div class="motivator" draggable="true">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjxvzEXHCDxM3d7_F4junZKQjg0cjNMw3Fug&s"
+              alt="Jigglypuff"
+            />
+            <span class="motivator-description"
+              ><b> Jigglypuff</b> believes in you! And she's watching you.</span
+            >
+          </div>
+          <div class="motivator" draggable="true">
+            <img
+              src="https://pinswags.com/cdn/shop/products/image_aee20a11-0a4b-4f40-bde7-f69098aead8e.jpg?v=1647826674&width=1946"
+              alt="Jolteon"
+            />
+            <span class="motivator-description"
+              ><b>Jolteon</b> says use quick attack :D and get things done fast!</span
+            >
+          </div>
+          <div class="motivator" draggable="true">
+            <img src="https://via.placeholder.com/32x32/45b7d1/ffffff?text=⭐" alt="Motivator3" />
+            <span class="motivator-description">____</span>
+          </div>
+          <div class="motivator" draggable="true">
+            <img src="https://via.placeholder.com/32x32/f9ca24/ffffff?text=⚡" alt="Motivator4" />
+            <span class="motivator-description">_____</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="board-container">
+        <div class="board">
+          <div class="column" data-column>
+            <h3>Today</h3>
+            <div class="dropzone"></div>
+          </div>
+
+          <div class="column" data-column>
+            <h3>Tomorrow</h3>
+            <div class="dropzone"></div>
+          </div>
+
+          <div class="column" data-column>
+            <h3>Aftermorrow</h3>
+            <div class="dropzone"></div>
+          </div>
+
+          <div class="column" data-column>
+            <h3>Long-term</h3>
+            <div class="dropzone"></div>
+          </div>
+        </div>
+
+        <button id="add-column" class="add-button">+</button>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- <button class="remove-column">×</button> -->
+
+<style>
+  .login-box {
+    margin-bottom: 12px;
+  }
+
+  .login-box button {
+    width: 100%;
+    background: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .login-box button:hover {
+    background: #3367d6;
+  }
+</style>

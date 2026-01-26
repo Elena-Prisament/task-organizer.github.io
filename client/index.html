@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="Ellipse 1 copy.png" type="image/x-icon" />
+    <link rel="icon" href="Ellipse 1 copy.png" type="image/x-icon" />
+    <title>Quest Log</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="home">
+    <canvas id="star-trail-canvas"></canvas>
+    <img class="background-image" src="https://opengameart.org/sites/default/files/5_69.png" />
+    <div class="home-container">
+      <h1>Quest Log</h1>
+      <p>Your tasks, but make them an adventure.</p>
+      <a href="quest.html" class="start-button">Start questing</a>
+    </div>
+    <script>
+      // Shooting star trail effect
+      const canvas = document.getElementById("star-trail-canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Set canvas size to cover the entire viewport
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      // Mouse tracking variables
+      let mouseX = 0;
+      let mouseY = 0;
+      let prevMouseX = 0;
+      let prevMouseY = 0;
+      let trailLength = 0;
+
+      // Store trail segments for fading effect
+      let trailSegments = [];
+
+      // Track mouse movement
+      document.addEventListener("mousemove", (e) => {
+        prevMouseX = mouseX;
+        prevMouseY = mouseY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Calculate distance moved (speed)
+        const distance = Math.sqrt(
+          Math.pow(mouseX - prevMouseX, 2) + Math.pow(mouseY - prevMouseY, 2)
+        );
+
+        // Set trail length based on movement speed
+        trailLength = Math.min(distance * 2, 50); // Max length of 100px
+
+        // Add new trail segment if there's movement
+        if (trailLength > 1) {
+          trailSegments.push({
+            x1: prevMouseX,
+            y1: prevMouseY,
+            x2: mouseX,
+            y2: mouseY,
+            opacity: 1.0,
+            life: 30, // frames to live
+          });
+
+          // 🔒 Cap the trail length
+          if (trailSegments.length > 3) {
+            trailSegments.shift(); // remove oldest
+          }
+        }
+      });
+
+      // Animation loop
+      function animate() {
+        // Clear canvas completely
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Update and draw trail segments
+        for (let i = trailSegments.length - 1; i >= 0; i--) {
+          const segment = trailSegments[i];
+
+          // Decrease life and opacity
+          segment.life--;
+          segment.opacity = segment.life / 50; // Fade over 30 frames
+
+          // Remove dead segments
+          if (segment.life <= 0) {
+            trailSegments.splice(i, 1);
+            continue;
+          }
+
+          // Draw segment with current opacity
+          ctx.strokeStyle = `rgba(255, 255, 255, ${segment.opacity})`;
+          ctx.lineWidth = 2;
+          ctx.lineCap = "round";
+
+          ctx.beginPath();
+          ctx.moveTo(segment.x1, segment.y1);
+          ctx.lineTo(segment.x2, segment.y2);
+          ctx.stroke();
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <title>CHANGE ME!</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html> -->
