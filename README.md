@@ -19,7 +19,7 @@ This is a static web application implementing a Kanban-style task board themed a
 
 - **Drag and Drop**: Use `cloneNode(true)` to duplicate dragged items into dropzones (see `script.js` lines 12-15)
 - **Contenteditable Dropzones**: Allow direct text input in columns for custom tasks (see `quest.html` dropzone elements)
-- **Theming**: Tasks prefixed with emojis (e.g., "🧺 Laundry"), motivators are single emojis (e.g., "🐉")
+- **Theming**: Tasks prefixed with emojis, motivators are cute characters you can drag and drop onto tasks!
 - **Navigation**: Simple `window.location.href` for page transitions (see `goHome()` function)
 
 ## Development Workflow
@@ -44,6 +44,6 @@ This is a static web application implementing a Kanban-style task board themed a
 
 ## Common Tasks
 
-- Adding new tasks: Append `<div class="task" draggable="true">📝 New Task</div>` to `.task-list`
+- Adding new tasks: Append `<div class="task" draggable="true">New Task</div>` to `.task-list`
 - Modifying columns: Update `<h3>` text and ensure 4-column grid in CSS
 - Styling changes: Edit `styles.css` with focus on flex/grid layouts and color scheme (#1f2333 sidebar, #f5f7fb background)
